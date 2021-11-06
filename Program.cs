@@ -1,7 +1,7 @@
 ﻿using System;
 using NLog.Web;
 
-namespace TicketClasses
+namespace TicketClassesMidterm
 {
     internal class Program
     {
@@ -9,8 +9,8 @@ namespace TicketClasses
         {
             var logger = NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
 
-            Console.WriteLine("1) Output CSV records.");
-            Console.WriteLine("2) Add CSV record. (Legacy code -> tickets.csv");
+            Console.WriteLine("1) Output CSV records");
+            Console.WriteLine("2) Add CSV record");
             Console.WriteLine("3) Bug/Defect");
             Console.WriteLine("4) Enhancement");
             Console.WriteLine("5) Task");
@@ -21,22 +21,22 @@ namespace TicketClasses
             {
                 if (inputNum == 1)
                 {
-                    Console.WriteLine("(B)ugs  |  (E)nhancements  |  (T)asks");
+                    Console.WriteLine("1)Bugs  |  2)Enhancements  |  3)Tasks");
                     var key = Console.ReadLine().ToUpper();
 
-                    if (key == "B")
+                    if (key == "1")
                     {
-                        TicketFileHandler file = new TicketFile("tickets.csv");
+                        TicketFileExt file = new TicketFile("tickets.csv");
                         file.ReadFromFile();
                     }
-                    else if (key == "E")
+                    else if (key == "2")
                     {
-                        TicketFileHandler file = new EnhancementFile("enhancements.csv");
+                        TicketFileExt file = new EnhancementFile("enhancements.csv");
                         file.ReadFromFile();
                     }
-                    else if (key == "T")
+                    else if (key == "3")
                     {
-                        TicketFileHandler file = new TaskFile("tasks.csv");
+                        TicketFileExt file = new TaskFile("tasks.csv");
                         file.ReadFromFile();
                     }
                 }
@@ -69,7 +69,7 @@ namespace TicketClasses
                     var severity = Console.ReadLine();
 
                     var ticket = new Bug(severity, id, summary, status, priority, submitter, assigned, watching);
-                    TicketFileHandler file = new TicketFile("tickets.csv");
+                    TicketFileExt file = new TicketFile("tickets.csv");
                     file.WriteToFile(ticket);
                 }
 
@@ -150,48 +150,7 @@ namespace TicketClasses
                     var file = new TaskFile("tasks.csv");
                     file.WriteToFile(task);
                 }
-                else if (inputNum == 6)
-                {
-                    Console.WriteLine("1) search status");
-                    Console.WriteLine("2) search Priority");
-                    Console.WriteLine("3) search Submitter");
-
-                    inputNum = Console.Read();
-                    if(inputNum == 1){
-                         Console.WriteLine("Enter your search term:");
-                         System.Console.Write(">");
-                         string Search = Console.ReadLine();
-                         var statuses = TicketFile.tickets.Where(t => t.status.Contains(Search)).Select(t => t.status);
-                         Console.WriteLine($"There are {status.Count()} movies with "+Search+" in the title:");
-                         foreach(string s in status)
-                         {
-                             Console.WriteLine($"  {t}");
-                         }
-                    }
-
-                    else if(inputNum == 2){
-                         Console.WriteLine("Enter your search term:");
-                         System.Console.Write(">");
-                         string Search = Console.ReadLine();
-                         var Priorities = TicketFile.tickets.Where(t => t.priority.Contains(Search)).Select(t => t.priority);
-                         Console.WriteLine($"There are {priority.Count()} movies with "+Search+" in the title:");
-                         foreach(string p in priority)
-                         {
-                             Console.WriteLine($"  {t}");
-                         }
-                    }
-                    else{
-                        Console.WriteLine("Enter your search term:");
-                         System.Console.Write(">");
-                         string Search = Console.ReadLine();
-                         var Submitters = TicketFile.tickets.Where(t => t.submitter.Contains(Search)).Select(t => t.submitter);
-                         Console.WriteLine($"There are {submitter.Count()} movies with "+Search+" in the title:");
-                         foreach(string s in submitter)
-                         {
-                             Console.WriteLine($"  {t}");
-                         }
-                    }
-                }
+            
             }
             catch (Exception e)
             {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TicketClasses
+namespace TicketClassesMidterm
 {
     public abstract class Ticket
     {

@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace TicketClasses
+namespace TicketClassesMidterm
 {
-    public abstract class TicketFileHandler
+    public abstract class TicketFileExt
     {
-        public TicketFileHandler(string filePath, List<Ticket> ticketsList = null)
+        public TicketFileExt(string filePath, List<Ticket> ticketsList = null)
         {
             FilePath = filePath;
             TicketsList = ticketsList;
@@ -42,7 +42,7 @@ namespace TicketClasses
         }
     }
 
-    public class TicketFile : TicketFileHandler
+    public class TicketFile : TicketFileExt
     {
         public TicketFile(string filePath, List<Ticket> ticketsList = null) : base(filePath, ticketsList)
         {
@@ -64,7 +64,7 @@ namespace TicketClasses
         }
     }
 
-    public class EnhancementFile : TicketFileHandler
+    public class EnhancementFile : TicketFileExt
     {
         public EnhancementFile(string filePath, List<Ticket> ticketsList = null) : base(filePath, ticketsList)
         {
@@ -84,7 +84,7 @@ namespace TicketClasses
         }
     }
 
-    public class TaskFile : TicketFileHandler
+    public class TaskFile : TicketFileExt
     {
         public TaskFile(string filePath, List<Ticket> ticketsList = null) : base(filePath, ticketsList)
         {
